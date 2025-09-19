@@ -1,11 +1,27 @@
-import datetime
-
-from airflow.sdk import DAG
-from airflow.providers.standard.operators.empty import EmptyOperator
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+from airflow.utils.dates import days_ago
 
 with DAG(
-        dag_id="my_dag_name",
-        start_date=datetime.datetime(2021, 1, 1),
-        schedule="@daily",
-):
-    EmptyOperator(task_id="task")
+    dag_id='simple_sequential_dag',
+    start_date=days_ago(1),
+    schedule_interval=None,
+    catchup=False,
+    tags=['example'],
+) as dag:
+    task1 = BashOperator(
+        task_id='start_task',
+        bash_command='echo "Starting workflow"',
+    )
+
+    task2 = BashOperator(
+        task_id='middle_task',
+        bash_command='echo "Processing data"',
+    )
+
+    task3 = BashOperator(
+        task_id='end_task',
+        bash_command='echo "Workflow finished"',
+    )
+
+    task1 >> task2 >> task3
