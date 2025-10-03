@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+cd "$(dirname "$(dirname "$(readlink -f "$0")")")"
+root_dir=$(pwd)
+
+export AIRFLOW__CORE__DAGS_FOLDER=$root_dir
+export AIRFLOW_HOME=$root_dir/.airflow
+airflow standalone
