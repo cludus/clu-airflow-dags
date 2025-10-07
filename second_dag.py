@@ -27,7 +27,7 @@ def my_dag():
         #         print(f" - {bucket['Name']}")
         # except Exception as e:
         #     print(f"Error connecting to MinIO or listing buckets: {e}")
-        print("task 1")
+        print("task 111")
         return 1
 
     @task
