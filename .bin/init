@@ -3,5 +3,5 @@
 cd "$(dirname "$(dirname "$(readlink -f "$0")")")"
 root_dir=$(pwd)
 
-cd root_dir
+cd $root_dir
 pip install "apache-airflow[celery]==3.1.0" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.1.0/constraints-3.13.txt"
